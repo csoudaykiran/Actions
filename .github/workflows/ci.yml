@@ -4,7 +4,17 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:  # <-- Manual trigger added
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Type of Release'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
   hello-world:
@@ -13,3 +23,6 @@ jobs:
     steps:
       - name: Print Hello World
         run: echo "Hello, World!"
+
+      - name: Print Release Type
+        run: echo "Release Type: ${{ github.event.inputs.release_type }}"
