@@ -1,20 +1,17 @@
 name: Hello World CI
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
-      release_type:
-        description: 'Type of Release'
+      environment:
+        description: 'The environment to deploy to'
         required: true
-        default: 'patch'
+        default: 'dev'
         type: choice
         options:
-          - patch
-          - minor
-          - major
+          - production
+          - qa
+          - dev
 
 jobs:
   hello-world:
